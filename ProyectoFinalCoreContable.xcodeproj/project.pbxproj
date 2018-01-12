@@ -13,6 +13,11 @@
 		09E57C4B20090A01001F9497 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09E57C4A20090A01001F9497 /* Assets.xcassets */; };
 		09E57C4E20090A01001F9497 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E57C4C20090A01001F9497 /* LaunchScreen.storyboard */; };
 		09E57C5120090A01001F9497 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C5020090A01001F9497 /* main.m */; };
+		09E57C5920090B51001F9497 /* EditarFacturaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C5820090B51001F9497 /* EditarFacturaController.m */; };
+		09E57C5D20090B89001F9497 /* Factura.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C5C20090B89001F9497 /* Factura.m */; };
+		09E57C6120091015001F9497 /* bbdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C6020091015001F9497 /* bbdd.m */; };
+		09E57C6A20093571001F9497 /* ListadoFacturasController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C6920093571001F9497 /* ListadoFacturasController.m */; };
+		09F029A220094663008D24EB /* DetalleFacturaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F029A120094663008D24EB /* DetalleFacturaController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +31,16 @@
 		09E57C4D20090A01001F9497 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09E57C4F20090A01001F9497 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09E57C5020090A01001F9497 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		09E57C5720090B51001F9497 /* EditarFacturaController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditarFacturaController.h; sourceTree = "<group>"; };
+		09E57C5820090B51001F9497 /* EditarFacturaController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditarFacturaController.m; sourceTree = "<group>"; };
+		09E57C5B20090B89001F9497 /* Factura.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Factura.h; sourceTree = "<group>"; };
+		09E57C5C20090B89001F9497 /* Factura.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Factura.m; sourceTree = "<group>"; };
+		09E57C5F20091015001F9497 /* bbdd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bbdd.h; sourceTree = "<group>"; };
+		09E57C6020091015001F9497 /* bbdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bbdd.m; sourceTree = "<group>"; };
+		09E57C6820093571001F9497 /* ListadoFacturasController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListadoFacturasController.h; sourceTree = "<group>"; };
+		09E57C6920093571001F9497 /* ListadoFacturasController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListadoFacturasController.m; sourceTree = "<group>"; };
+		09F029A020094663008D24EB /* DetalleFacturaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetalleFacturaController.h; sourceTree = "<group>"; };
+		09F029A120094663008D24EB /* DetalleFacturaController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetalleFacturaController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,8 +82,34 @@
 				09E57C4C20090A01001F9497 /* LaunchScreen.storyboard */,
 				09E57C4F20090A01001F9497 /* Info.plist */,
 				09E57C5020090A01001F9497 /* main.m */,
+				09E57C5A20090B5E001F9497 /* CONTROLADOR */,
+				09E57C5E20090B8D001F9497 /* MODELO */,
 			);
 			path = ProyectoFinalCoreContable;
+			sourceTree = "<group>";
+		};
+		09E57C5A20090B5E001F9497 /* CONTROLADOR */ = {
+			isa = PBXGroup;
+			children = (
+				09F029A020094663008D24EB /* DetalleFacturaController.h */,
+				09F029A120094663008D24EB /* DetalleFacturaController.m */,
+				09E57C5720090B51001F9497 /* EditarFacturaController.h */,
+				09E57C5820090B51001F9497 /* EditarFacturaController.m */,
+				09E57C6820093571001F9497 /* ListadoFacturasController.h */,
+				09E57C6920093571001F9497 /* ListadoFacturasController.m */,
+			);
+			path = CONTROLADOR;
+			sourceTree = "<group>";
+		};
+		09E57C5E20090B8D001F9497 /* MODELO */ = {
+			isa = PBXGroup;
+			children = (
+				09E57C5B20090B89001F9497 /* Factura.h */,
+				09E57C5C20090B89001F9497 /* Factura.m */,
+				09E57C5F20091015001F9497 /* bbdd.h */,
+				09E57C6020091015001F9497 /* bbdd.m */,
+			);
+			path = MODELO;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,9 +183,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09E57C5D20090B89001F9497 /* Factura.m in Sources */,
 				09E57C4620090A01001F9497 /* ViewController.m in Sources */,
+				09F029A220094663008D24EB /* DetalleFacturaController.m in Sources */,
 				09E57C5120090A01001F9497 /* main.m in Sources */,
+				09E57C6A20093571001F9497 /* ListadoFacturasController.m in Sources */,
+				09E57C6120091015001F9497 /* bbdd.m in Sources */,
 				09E57C4320090A01001F9497 /* AppDelegate.m in Sources */,
+				09E57C5920090B51001F9497 /* EditarFacturaController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
