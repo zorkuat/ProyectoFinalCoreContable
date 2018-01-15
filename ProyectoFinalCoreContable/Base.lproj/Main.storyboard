@@ -52,7 +52,7 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="g0w-QX-3fT">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="N4N-Dg-eKz">
                             <connections>
-                                <segue destination="vK2-tA-Rz9" kind="show" id="ZRU-Qb-L2D"/>
+                                <segue destination="vK2-tA-Rz9" kind="show" identifier="editarContacto" id="ZRU-Qb-L2D"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -601,7 +601,7 @@
                                             <constraint firstAttribute="height" constant="30" id="WqB-F5-yww"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="left" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="RC0-q5-eCk">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="RC0-q5-eCk">
                                         <rect key="frame" x="0.0" y="68" width="355" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CIF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYx-cj-RLE">
@@ -630,11 +630,11 @@
                                             <constraint firstItem="fYx-cj-RLE" firstAttribute="leading" secondItem="RC0-q5-eCk" secondAttribute="leading" id="cvh-dR-K5q"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="GCS-Bc-LvI">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GCS-Bc-LvI">
                                         <rect key="frame" x="0.0" y="102" width="355" height="47"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre o Razón Social:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6T-vZ-d3D">
-                                                <rect key="frame" x="0.0" y="0.0" width="154" height="26.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="26.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -659,11 +659,11 @@
                                             <constraint firstItem="vFj-SB-LpO" firstAttribute="top" secondItem="A6T-vZ-d3D" secondAttribute="bottom" id="oac-qD-nqo"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="INa-ar-nh4">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="INa-ar-nh4">
                                         <rect key="frame" x="0.0" y="153" width="355" height="47"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Concepto" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="50z-Qa-DHe">
-                                                <rect key="frame" x="0.0" y="0.0" width="63" height="26.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="26.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -748,7 +748,7 @@
                                             <constraint firstItem="ByB-zf-ktY" firstAttribute="leading" secondItem="ejh-gV-wrc" secondAttribute="trailing" constant="8" id="VeA-jb-bT0"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="right" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="rHQ-qm-O0V">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="rHQ-qm-O0V">
                                         <rect key="frame" x="0.0" y="238" width="355" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOTAL" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8MH-WQ-CdG">

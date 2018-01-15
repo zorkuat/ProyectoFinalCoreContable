@@ -18,6 +18,8 @@
 
 @implementation ListadoFacturasController
 
+
+/// CARGA DE VISTA. Creamos la base de datos interna que se relena con datos dummies.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -25,16 +27,21 @@
     
     [self.bbdd loadDatabase];
     
+    /// Asignación del botón de la barra de navegación izquierda (no asignada en el storyboard) al botón edit.
+    /// Sirve para la edición inmediata (funciones quick de borrado e insercción)
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     NSLog(@"%ld",self.bbdd.facturas.count);
 }
 
+
+/// Aviso de memoria agotada
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+/// No se toca tampoco. Función de animación en carga
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -42,17 +49,32 @@
     
 }
 
+/////////////////////////////////////////////////////////////////
+// OVERRIDING de funciones básicas del controlador Table View. //
+/////////////////////////////////////////////////////////////////
+
+// FUNCIONES DE GESTIÓN DE DATOS
 #pragma mark - Table view data source
 
+// Definición del número de secciones
+// A falta de definir cuantas secciones: 1
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // #warning Incomplete implementation, return the number of sections
     return 1;
 }
 
+// Deficinión del número de filas
+// Una fila por cada elemento de la tabla más el elemento de edición.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // #warning Incomplete implementation, return the number of rows
     return self.bbdd.facturas.count + 1;
 }
+
+
+/// Método de mostrado de datos por fila:
+/// PRE: bbdd != NIL
+/// POST: indexPath.i.cell.contenidos[...].TextLabel.Text == bbdd.i.contenidos[...].contenido
+/// POST: if indexPath.i+1 -> cell.contenidos == nuevoContacto
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
@@ -64,10 +86,11 @@
         float total = factura.baseImponible + factura.tipoIVA*factura.baseImponible/100;
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%f", total];
        
-        /*if(contacto.foto != nil)
+        // Si no tenemos foto cargada no metemos preview de foto.
+        if(factura.imagenFactura != nil)
         {
-            cell.imageView.image = contacto.foto ;
-        }*/
+            cell.imageView.image = factura.imagenFactura ;
+        }
     }
     else
     {
@@ -79,6 +102,7 @@
 }
 
 
+/// Si se selecciona una celda se lanza la transición.
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row < self.bbdd.facturas.count)
@@ -100,9 +124,21 @@
     }
 }*/
 
+
+// FUNCIONES DE GESTIÓN DE TRASNSICIÓN DE VISTA
+
 #pragma mark - Table view transition
 
-// Este método es el Adolfo Suárez de los métodos.
+// Este método es el Adolfo Suárez de los métodos: Prepara la Transición.
+// PRE: vistaSiguiente == verFactura
+// POST: enviar.factura -> vistaSiguiente
+
+// Quicksort adding
+// PRE: vistaSiguiente == crearContacto
+// POST: vistaSiguiente.selfdelegate
+
+// PRE: vistaSiguiente == añadirContacto
+// POST: vista
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     /// CREAR LA TRANSICIÓN PARA VER CONTACTO
@@ -132,7 +168,6 @@
     }
 */
 }
-
 
 
 // Override to support conditional editing of the table view.
