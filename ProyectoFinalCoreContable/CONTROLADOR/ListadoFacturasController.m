@@ -78,14 +78,14 @@
     return cell;
 }
 
-/*
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row < self.bbdd.contactos.count)
+    if(indexPath.row < self.bbdd.facturas.count)
     {
-        [self performSegueWithIdentifier:@"verContacto" sender:nil];
+        [self performSegueWithIdentifier:@"verFactura" sender:nil];
     }
-}*/
+}
 
 /*
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath

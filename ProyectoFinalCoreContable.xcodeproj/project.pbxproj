@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		090B5694200D0C6600A42836 /* DetalleFacturaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090B5693200D0C6600A42836 /* DetalleFacturaController.m */; };
 		09E57C4320090A01001F9497 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C4220090A01001F9497 /* AppDelegate.m */; };
 		09E57C4620090A01001F9497 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C4520090A01001F9497 /* ViewController.m */; };
 		09E57C4920090A01001F9497 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E57C4720090A01001F9497 /* Main.storyboard */; };
@@ -17,10 +18,11 @@
 		09E57C5D20090B89001F9497 /* Factura.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C5C20090B89001F9497 /* Factura.m */; };
 		09E57C6120091015001F9497 /* bbdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C6020091015001F9497 /* bbdd.m */; };
 		09E57C6A20093571001F9497 /* ListadoFacturasController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C6920093571001F9497 /* ListadoFacturasController.m */; };
-		09F029A220094663008D24EB /* DetalleFacturaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F029A120094663008D24EB /* DetalleFacturaController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		090B5693200D0C6600A42836 /* DetalleFacturaController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetalleFacturaController.m; sourceTree = "<group>"; };
+		090B5695200D0C8400A42836 /* DetalleFacturaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetalleFacturaController.h; sourceTree = "<group>"; };
 		09E57C3E20090A01001F9497 /* ProyectoFinalCoreContable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProyectoFinalCoreContable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E57C4120090A01001F9497 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		09E57C4220090A01001F9497 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -39,8 +41,6 @@
 		09E57C6020091015001F9497 /* bbdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bbdd.m; sourceTree = "<group>"; };
 		09E57C6820093571001F9497 /* ListadoFacturasController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListadoFacturasController.h; sourceTree = "<group>"; };
 		09E57C6920093571001F9497 /* ListadoFacturasController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListadoFacturasController.m; sourceTree = "<group>"; };
-		09F029A020094663008D24EB /* DetalleFacturaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetalleFacturaController.h; sourceTree = "<group>"; };
-		09F029A120094663008D24EB /* DetalleFacturaController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetalleFacturaController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,12 +91,12 @@
 		09E57C5A20090B5E001F9497 /* CONTROLADOR */ = {
 			isa = PBXGroup;
 			children = (
-				09F029A020094663008D24EB /* DetalleFacturaController.h */,
-				09F029A120094663008D24EB /* DetalleFacturaController.m */,
+				090B5695200D0C8400A42836 /* DetalleFacturaController.h */,
 				09E57C5720090B51001F9497 /* EditarFacturaController.h */,
 				09E57C5820090B51001F9497 /* EditarFacturaController.m */,
 				09E57C6820093571001F9497 /* ListadoFacturasController.h */,
 				09E57C6920093571001F9497 /* ListadoFacturasController.m */,
+				090B5693200D0C6600A42836 /* DetalleFacturaController.m */,
 			);
 			path = CONTROLADOR;
 			sourceTree = "<group>";
@@ -185,7 +185,7 @@
 			files = (
 				09E57C5D20090B89001F9497 /* Factura.m in Sources */,
 				09E57C4620090A01001F9497 /* ViewController.m in Sources */,
-				09F029A220094663008D24EB /* DetalleFacturaController.m in Sources */,
+				090B5694200D0C6600A42836 /* DetalleFacturaController.m in Sources */,
 				09E57C5120090A01001F9497 /* main.m in Sources */,
 				09E57C6A20093571001F9497 /* ListadoFacturasController.m in Sources */,
 				09E57C6120091015001F9497 /* bbdd.m in Sources */,
