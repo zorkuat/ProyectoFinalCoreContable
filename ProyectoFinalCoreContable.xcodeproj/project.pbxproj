@@ -23,6 +23,7 @@
 /* Begin PBXFileReference section */
 		090B5693200D0C6600A42836 /* DetalleFacturaController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetalleFacturaController.m; sourceTree = "<group>"; };
 		090B5695200D0C8400A42836 /* DetalleFacturaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetalleFacturaController.h; sourceTree = "<group>"; };
+		090B5696200D28D800A42836 /* EditarFacturaDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditarFacturaDelegate.h; sourceTree = "<group>"; };
 		09E57C3E20090A01001F9497 /* ProyectoFinalCoreContable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProyectoFinalCoreContable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E57C4120090A01001F9497 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		09E57C4220090A01001F9497 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -92,11 +93,12 @@
 			isa = PBXGroup;
 			children = (
 				090B5695200D0C8400A42836 /* DetalleFacturaController.h */,
+				090B5693200D0C6600A42836 /* DetalleFacturaController.m */,
 				09E57C5720090B51001F9497 /* EditarFacturaController.h */,
 				09E57C5820090B51001F9497 /* EditarFacturaController.m */,
 				09E57C6820093571001F9497 /* ListadoFacturasController.h */,
 				09E57C6920093571001F9497 /* ListadoFacturasController.m */,
-				090B5693200D0C6600A42836 /* DetalleFacturaController.m */,
+				090B5696200D28D800A42836 /* EditarFacturaDelegate.h */,
 			);
 			path = CONTROLADOR;
 			sourceTree = "<group>";

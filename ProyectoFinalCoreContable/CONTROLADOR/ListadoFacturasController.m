@@ -11,6 +11,7 @@
 #import "ListadoFacturasController.h"
 #import "DetalleFacturaController.h"
 #import "EditarFacturaController.h"
+#import "EditarFacturaDelegate.h"
 
 @interface ListadoFacturasController ()
 
@@ -151,22 +152,21 @@
         
         DetalleFacturaController *escenaDestino = segue.destinationViewController;
         
-        // Vamos a pasar la información
+        // Vamos a pasar la información. Aquí la factura es la INTERNA de gestión de la escena destino.
         escenaDestino.factura = facturaSeleccionada;
     }
     /*
     else if ([segue.identifier isEqualToString:@"crearContacto"])
     {
-        EditarContactoController *escenaDestino = segue.destinationViewController;
-        escenaDestino.delegado = self;
+        EditarFacturaController *escenaDestino = segue.destinationViewController;
+        //escenaDestino.delegado = self;
     }
     else if ([segue.identifier isEqualToString:@"anadirContacto"])
     {
         UINavigationController *navController = segue.destinationViewController;
-        EditarContactoController *escenaDestino = (id)navController.topViewController;
-        escenaDestino.delegado = self;
-    }
-*/
+        EditarFacturaController *escenaDestino = (id)navController.topViewController;
+        //escenaDestino.delegado = self;
+    }*/
 }
 
 

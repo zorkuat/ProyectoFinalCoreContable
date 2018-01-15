@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Factura.h"
+#import "EditarFacturaDelegate.h"
 
-@interface EditarFacturaController : UIViewController
+@interface EditarFacturaController : UITableViewController<UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+
+@property (nonatomic,weak) id<EditarFacturaDelegate> delegado;
 
 @end
