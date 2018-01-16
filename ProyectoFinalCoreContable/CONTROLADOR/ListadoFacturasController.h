@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EditarFacturaDelegate.h"
 #import "Factura.h"
 #import "bbdd.h"
 
-@interface ListadoFacturasController : UITableViewController
+@interface ListadoFacturasController : UITableViewController <EditarFacturaDelegate>
 
 @property (nonatomic) Factura * factura;
 

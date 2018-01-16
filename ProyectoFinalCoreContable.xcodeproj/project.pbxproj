@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		090B5694200D0C6600A42836 /* DetalleFacturaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090B5693200D0C6600A42836 /* DetalleFacturaController.m */; };
+		0959396A200E5162005856F0 /* file-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 09593969200E5162005856F0 /* file-512.png */; };
 		09E57C4320090A01001F9497 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C4220090A01001F9497 /* AppDelegate.m */; };
 		09E57C4620090A01001F9497 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C4520090A01001F9497 /* ViewController.m */; };
 		09E57C4920090A01001F9497 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E57C4720090A01001F9497 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 		090B5693200D0C6600A42836 /* DetalleFacturaController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetalleFacturaController.m; sourceTree = "<group>"; };
 		090B5695200D0C8400A42836 /* DetalleFacturaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetalleFacturaController.h; sourceTree = "<group>"; };
 		090B5696200D28D800A42836 /* EditarFacturaDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditarFacturaDelegate.h; sourceTree = "<group>"; };
+		09593969200E5162005856F0 /* file-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "file-512.png"; path = "Assets.xcassets/file-512.png"; sourceTree = "<group>"; };
 		09E57C3E20090A01001F9497 /* ProyectoFinalCoreContable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProyectoFinalCoreContable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E57C4120090A01001F9497 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		09E57C4220090A01001F9497 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				09E57C4520090A01001F9497 /* ViewController.m */,
 				09E57C4720090A01001F9497 /* Main.storyboard */,
 				09E57C4A20090A01001F9497 /* Assets.xcassets */,
+				09593969200E5162005856F0 /* file-512.png */,
 				09E57C4C20090A01001F9497 /* LaunchScreen.storyboard */,
 				09E57C4F20090A01001F9497 /* Info.plist */,
 				09E57C5020090A01001F9497 /* main.m */,
@@ -172,6 +175,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0959396A200E5162005856F0 /* file-512.png in Resources */,
 				09E57C4E20090A01001F9497 /* LaunchScreen.storyboard in Resources */,
 				09E57C4B20090A01001F9497 /* Assets.xcassets in Resources */,
 				09E57C4920090A01001F9497 /* Main.storyboard in Resources */,

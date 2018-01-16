@@ -26,6 +26,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *totalTextView;
 @property (weak, nonatomic) IBOutlet UITextField *rectificacionTextView;
 
+@property (strong, nonatomic) IBOutlet UIDatePicker *pickerFecha;
+@property (strong, nonatomic) IBOutlet UIToolbar *barraEditor;
+
+@property (weak, nonatomic) UITextField *campoTextoActual;
+
 @end
 
 @implementation EditarFacturaController
@@ -37,31 +42,99 @@
     [self.delegado cancelar];
 }
 
+
+// MÉTODO DE CARGA DE LAS VISTAS.
+// Creamos la variable de trabajo local y actualizamos los campos si no son vacíos.
+// Asociamos las referencias a vista con los campos de la variable de trabajo local.
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    // Para quitar el espacio que se queda entre el picker y la barra de accesory view.
+    // En realidad son movidas de constraints y su puta madre.
+    
+    if(self.factura == nil)
+    {
+         self.factura = [[Factura alloc] init];
+    }
+    
+    /* No hay imagen en esta vista
+    if (self.factura.imagenFactura foto != nil)
+    {
+        self.factura = self.contacto.foto;
+    }*/
+     
+    //self.vistaImagenContacto.layer.borderWidth = 1;
+    //self.vistaImagenContacto.layer.cornerRadius = 8;
+     
+    self.pickerFecha.translatesAutoresizingMaskIntoConstraints = false;
+    self.fechaExpedicionTextView.inputView = self.pickerFecha;
+    self.fechaExpedicionTextView.inputAccessoryView = self.barraEditor;
+    self.fechaOperacionTextView.inputView = self.pickerFecha;
+    self.fechaOperacionTextView.inputAccessoryView = self.barraEditor;
+     
+    // Añadida la barra de botón DONE al teclado.
+    //self.campoTextoTelefono.inputAccessoryView = self.barraEditor;
+     
+    self.cIFTextView.text = self.factura.CIF;
+    self.razonSocialTextView.text = self.factura.razonSocial;
+    self.conceptoTextView.text = self.factura.concepto;
+    self.baseImponibleTextView.text = [NSString stringWithFormat:@"%f", self.factura.baseImponible];
+    self.tipoIvaTextView.text = [NSString stringWithFormat:@"%ld", self.factura.tipoIVA];
+    self.rectificacionTextView.text = [NSString stringWithFormat:@"%f", self.factura.rectificacion];
+    NSInteger total = self.factura.baseImponible + (self.factura.tipoIVA*self.factura.baseImponible/100) - self.factura.rectificacion;
+    self.totalTextView.text = [NSString stringWithFormat:@"%ld", total];
+    
+    
+    if(self.factura.fechaDeExpedicion != nil)
+    {
+        self.pickerFecha.date = self.factura.fechaDeExpedicion;
+        NSDateFormatter *formatoFecha = [[NSDateFormatter alloc] init];
+        formatoFecha.dateFormat = @"dd / MM / YYYY";
+        self.fechaExpedicionTextView.text = [formatoFecha stringFromDate:self.factura.fechaDeExpedicion];
+    }
+    
+    if(self.factura.fechaDeOperacion != nil)
+    {
+        self.pickerFecha.date = self.factura.fechaDeOperacion;
+        NSDateFormatter *formatoFecha = [[NSDateFormatter alloc] init];
+        formatoFecha.dateFormat = @"dd / MM / YYYY";
+        self.fechaOperacionTextView.text = [formatoFecha stringFromDate:self.factura.fechaDeOperacion];
+    }
+}
+
 // Implementación del método para guardar los datos de usuario
 - (IBAction)saveButtonPressed:(id)sender {
     
-    self.contacto.nombre = self.campoTextoNombre.text;
-    self.contacto.telefono = self.campoTextoTelefono.text;
-    self.contacto.email = self.campoTextoEmail.text;
-    self.contacto.foto = self.fotoSeleccionada;
-    
+    // Durante el botón guardado, actualizamos los valores desde las vistas al objeto de trabajo
+    self.factura.numero = self.facturaNumeroTextView.text;
+    self.factura.CIF = self.cIFTextView.text;
+    self.factura.razonSocial = self.razonSocialTextView.text;
+    self.factura.concepto = self.conceptoTextView.text;
+    self.factura.baseImponible = [self.baseImponibleTextView.text floatValue];
+    self.factura.tipoIVA = [self.tipoIvaTextView.text integerValue];
+    self.factura.rectificacion = [self.rectificacionTextView.text floatValue];
+  
     NSDateFormatter *formatoFecha = [[NSDateFormatter alloc] init];
     formatoFecha.dateFormat = @"dd / MM / YYYY";
-    self.contacto.fechadeNacimiento = [formatoFecha dateFromString:self.campoTextoFechaNacimiento.text];
-    
-    //
-    [self.delegado guardarContacto:self.contacto];
-    
+    self.factura.fechaDeExpedicion = [formatoFecha dateFromString:self.fechaExpedicionTextView.text];
+    self.factura.fechaDeOperacion = [formatoFecha dateFromString:self.fechaOperacionTextView.text];
+   
+    // llamamos al delegado que guarda la factura.
+    // AMBAS VISTAS TIENEN QUE IMPLEMENTAR EL DELEGADO
+    [self.delegado guardarfactura:self.factura];
 }
 
+/*
 - (IBAction)imagenPulsada:(id)sender {
     // Ya luego si eso.
     UIImagePickerController * galeria = [[UIImagePickerController alloc] init];
     galeria.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     galeria.delegate = self;
     [self presentViewController:galeria animated:true completion:nil];
-}
+}*/
 
+/*
 - (IBAction)botonDonePulsado:(id)sender {
     if(self.campoTextoActual == self.campoTextoTelefono)
     {
@@ -71,10 +144,10 @@
     {
         [self.campoTextoFechaNacimiento resignFirstResponder];
     }
-}
+}*/
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
+{/*
     if(textField == self.campoTextoNombre)
     {
         [self.campoTextoTelefono becomeFirstResponder];
@@ -83,57 +156,19 @@
     {
         [self.campoTextoFechaNacimiento becomeFirstResponder];
     }
-    
+    */
     return true;
 }
 
 - (IBAction)pickerFechaCambiada:(id)sender {
+    /*
     NSDateFormatter *formatoFecha = [[NSDateFormatter alloc] init];
     formatoFecha.dateFormat = @"dd / MM / YYYY";
     self.campoTextoFechaNacimiento.text = [formatoFecha stringFromDate:self.pickerFecha.date];
+     */
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    // Para quitar el espacio que se queda entre el picker y la barra de accesory view.
-    // En realidad son movidas de constraints y su puta madre.
-    
-    if(self.contacto == nil)
-    {
-        self.contacto = [[Contacto alloc] init];
-    }
-    
-    if (self.contacto.foto != nil)
-    {
-        self.vistaImagenContacto.image = self.contacto.foto;
-    }
-    
-    self.vistaImagenContacto.layer.borderWidth = 1;
-    self.vistaImagenContacto.layer.cornerRadius = 8;
-    
-    self.pickerFecha.translatesAutoresizingMaskIntoConstraints = false;
-    
-    self.campoTextoFechaNacimiento.inputView = self.pickerFecha;
-    self.campoTextoFechaNacimiento.inputAccessoryView = self.barraEditor;
-    
-    // Añadida la barra de botón DONE al teclado.
-    self.campoTextoTelefono.inputAccessoryView = self.barraEditor;
-    
-    self.campoTextoNombre.text = self.contacto.nombre;
-    self.campoTextoTelefono.text = self.contacto.telefono;
-    self.campoTextoEmail.text = self.contacto.email;
-    
-    if(self.contacto.fechadeNacimiento != nil)
-    {
-        self.pickerFecha.date = self.contacto.fechadeNacimiento;
-        NSDateFormatter *formatoFecha = [[NSDateFormatter alloc] init];
-        formatoFecha.dateFormat = @"dd / MM / YYYY";
-        self.campoTextoFechaNacimiento.text = [formatoFecha stringFromDate:self.contacto.fechadeNacimiento];
-    }
-    
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -143,6 +178,7 @@
 #pragma mark - TEXT FIELD DELEGATE
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
+    /*
     if (textField == self.campoTextoTelefono){
         for(int i=0; i<string.length; i++)
         {
@@ -154,27 +190,32 @@
         if (((int)(textField.text.length) + string.length - range.length) > 9)
             return false;
     }
+     */
     return true;
+     
 }
 
-
+/*
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    
     self.campoTextoActual = textField;
-}
+    /
+}*/
 
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
+    /*
     if(textField == self.campoTextoEmail)
     {
-        /* Método 1
+         // Método 1
          NSRange posicionArroba = [textField.text rangeOfString:@"@"];
          
          NSUInteger posicionInicialPunto = posicionArroba.location == NSNotFound ? 0 : posicionArroba.location;
          
          NSUInteger longitudPunto = posicionArroba.location == NSNotFound ? 0 : textField.text.length - posicionArroba.location;
          NSRange posicionPunto = [textField.text rangeOfString:@"." options:NSBackwardsSearch range:NSMakeRange(posicionInicialPunto,longitudPunto)];
-         */
+     
         
         NSRange posicionArroba = [textField.text rangeOfString:@"@"];
         NSRange posicionPunto = [textField.text rangeOfString:@"."
@@ -194,7 +235,8 @@
             return false;
         }
         
-    }
+    }*/
+
     return true /*BLOOD*/;
 }
 
@@ -217,6 +259,7 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
+    /*
     NSURL *imageURL = info[UIImagePickerControllerImageURL];
     
     UIImage *foto = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL] scale: 1];
@@ -226,6 +269,7 @@
     self.fotoSeleccionada = foto;
     
     [self dismissViewControllerAnimated:true completion:nil];
+     */
 }
 
 @end

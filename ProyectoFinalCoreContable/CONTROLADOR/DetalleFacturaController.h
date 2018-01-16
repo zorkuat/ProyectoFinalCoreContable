@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Factura.h"
+#import "EditarFacturaDelegate.h"
 
-@interface DetalleFacturaController : UIViewController
+@interface DetalleFacturaController : UIViewController<EditarFacturaDelegate>
 
 @property (nonatomic) Factura * factura;
 

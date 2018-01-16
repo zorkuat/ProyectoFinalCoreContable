@@ -17,8 +17,9 @@
 
 @end
 
-@implementation ListadoFacturasController
+//////////////////////////////////////////////////////////////
 
+@implementation ListadoFacturasController
 
 /// CARGA DE VISTA. Creamos la base de datos interna que se relena con datos dummies.
 - (void)viewDidLoad {
@@ -41,6 +42,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 /// No se toca tampoco. Función de animación en carga
 -(void)viewWillAppear:(BOOL)animated
@@ -95,7 +97,7 @@
     }
     else
     {
-        cell.textLabel.text = @"Nuevo contacto";
+        cell.textLabel.text = @"Nueva Factura";
         cell.detailTextLabel.text = @"";
         
     }
@@ -112,10 +114,11 @@
     }
 }
 
-/*
+
+/// Métodos quicksort para edición rápida.
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row < self.bbdd.contactos.count)
+    if (indexPath.row < self.bbdd.facturas.count)
     {
         return UITableViewCellEditingStyleDelete;
     }
@@ -123,7 +126,7 @@
     {
         return UITableViewCellEditingStyleInsert;
     }
-}*/
+}
 
 
 // FUNCIONES DE GESTIÓN DE TRASNSICIÓN DE VISTA
@@ -142,7 +145,11 @@
 // POST: vista
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    /// CREAR LA TRANSICIÓN PARA VER CONTACTO
+    /////////////////////////////////////////////
+    /// CREAR LA TRANSICIÓN PARA VER CONTACTO ///
+    /////////////////////////////////////////////
+    
+    /// CASO DE TRANSICIÓN A LA VISTA DE EDICIÓN
     if([segue.identifier isEqualToString:@"verFactura"])
     {
         // Generamos una variable auxiliar recuperando el contacto desde la fila seleccionada ppor el usuario.
@@ -155,18 +162,24 @@
         // Vamos a pasar la información. Aquí la factura es la INTERNA de gestión de la escena destino.
         escenaDestino.factura = facturaSeleccionada;
     }
-    /*
-    else if ([segue.identifier isEqualToString:@"crearContacto"])
+    /// CASO DE TRANSICIÓN A LA PANTALLA QUICKSHORT DE EDICIÓN
+    else if ([segue.identifier isEqualToString:@"crearFactura"])
     {
+        // En el caso de que creemos la factura desde la lista, nos autoasignamos el delegado para implementar los métodos del
+        // protocolo. Asignación directa.
+        // Ahora mismo daría lo mismo.
         EditarFacturaController *escenaDestino = segue.destinationViewController;
-        //escenaDestino.delegado = self;
+        escenaDestino.delegado = self;
     }
-    else if ([segue.identifier isEqualToString:@"anadirContacto"])
+    
+    /// CASO DE TRANSICIÓN A LA VISTA DE ADICIÓN DE FACTURA
+    /// No es transición directa, hay que pasar por la vista de navegación primero.
+    else if ([segue.identifier isEqualToString:@"anadirFactura"])
     {
         UINavigationController *navController = segue.destinationViewController;
         EditarFacturaController *escenaDestino = (id)navController.topViewController;
-        //escenaDestino.delegado = self;
-    }*/
+        escenaDestino.delegado = self;
+    }
 }
 
 
@@ -178,74 +191,51 @@
 }
 
 
-/*
+#pragma mark - Table View Quick Editing
+
+// MÉTODO PARA LA EDICIÓN EN QUICKSHORT
 // Override to support editing the table view.
+/// Método para insertar en lugar de borrar.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 forRowAtIndexPath:(NSIndexPath *)indexPath {
+    /// QUICK BORRADO
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [self.bbdd.contactos removeObjectAtIndex:indexPath.row];
-        
+        [self.bbdd.facturas removeObjectAtIndex:indexPath.row];
+        /// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+        /// $$ MOSTRAR UNA ALERTA                        $$
+        /// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+    /// QUICK INSERCCIÓN
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        
+        Factura *nuevaFactura = [[Factura alloc] init];
         /// Insercción a nivel de datos
-        Contacto *nuevoContacto = [[Contacto alloc] init];
-        nuevoContacto.nombre = @"Nombre contacto";
-        [self.bbdd.contactos addObject: nuevoContacto];
+        /// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+        /// $$ IMPLEMENTAR MÉTODO PARA LLAMAR A UN PICKER PERSONALIZADO Y RELLENAR LOS DATOS DE LA FACTURA $$
+        /// $$ O EN SU DEFECTO LLAMAR DIRECTAMENTE A LA VISTA DE EDICIÓN DE FACTURA                        $$
+        /// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+        nuevaFactura.numero = @"Numero Nuevo";
+        [self.bbdd.facturas addObject: nuevaFactura];
         
-        /// Insercción a nivel de vista
+        /// Insercción a nivel de vista con animación.x
         [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
     }
 }
-*/
- 
-/*
- /// Método para insertar en lugar de borrar.
- -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
- {
- return UITableViewCellEditingStyleInsert;
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 #pragma mark - Editar Contacto Delegate
 
-/*
 -(void)cancelar
 {
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
--(void)guardarContacto:(Contacto *)contacto
+-(void)guardarfactura:(Factura *)Factura
 {
-    [self.bbdd.contactos addObject:self.contacto];
+    [self.bbdd.facturas addObject:self.factura];
     [self dismissViewControllerAnimated:true completion:nil];
 }
-*/
+
 
 @end

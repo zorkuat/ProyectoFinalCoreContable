@@ -14,4 +14,6 @@
 
 @property (nonatomic,weak) id<EditarFacturaDelegate> delegado;
 
+@property (nonatomic) Factura* factura;
+
 @end

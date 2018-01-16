@@ -49,10 +49,10 @@ Dichas autorizaciones deberán ser objeto de la debida publicidad.
 @property (nonatomic) NSInteger tipoIVA;
 
 /// g) Contraprestación total.
-@property (nonatomic) NSInteger baseImponible;
+@property (nonatomic) float baseImponible;
 
 /// h) En las facturas rectificativas, la referencia a la factura rectificada.
-@property (nonatomic) NSInteger rectificacion;
+@property (nonatomic) float rectificacion;
 
 /// i) En su caso, si se producen las siguientes circunstancias:
 /// - En operaciones exentas referencia a la normativa
