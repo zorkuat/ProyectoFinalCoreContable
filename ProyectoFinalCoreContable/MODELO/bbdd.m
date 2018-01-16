@@ -65,6 +65,14 @@
         nuevaFactura.razonSocial = [NSString stringWithFormat:@"Razon Social %d", i+1];
         
         // Concepto
+        nuevaFactura.conceptos = [NSMutableArray array];
+        for (int i=0; i<3; i++)
+        {
+            NSString *concepto = [NSString stringWithFormat:@"Concepto %d", i+1];
+            [nuevaFactura.conceptos addObject:concepto];
+        }
+        
+        // a extinguir
         nuevaFactura.concepto = [NSString stringWithFormat:@"Concepto %d", i+1];
         
         // IVA

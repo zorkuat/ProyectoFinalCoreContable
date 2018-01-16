@@ -43,6 +43,9 @@ Dichas autorizaciones deberán ser objeto de la debida publicidad.
 @property (nonatomic) NSString *razonSocial;
 
 /// e) Identificación de los bienes entregados o servicios prestados.
+@property (nonatomic) NSMutableArray *conceptos;
+
+// Concepto único a extinguir.
 @property (nonatomic) NSString *concepto;
 
 /// f) Tipo impositivo, y opcionalmente también la expresión “IVA incluido”

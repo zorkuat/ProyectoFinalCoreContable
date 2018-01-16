@@ -100,6 +100,7 @@
         
         // Vamos a pasar la información
         escenaDestino.factura = self.factura;
+        escenaDestino.delegado = self;
         
     }
 }
@@ -111,9 +112,9 @@
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
--(void)guardarfactura:(Factura *)Factura
+-(void)guardarfactura:(Factura *)factura
 {
-    //[self.bbdd.facturas addObject:self.factura];
+    // [self.bbdd.facturas addObject:self.factura];
     [self dismissViewControllerAnimated:true completion:nil];
 }
 

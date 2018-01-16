@@ -112,6 +112,10 @@
     {
         [self performSegueWithIdentifier:@"verFactura" sender:nil];
     }
+    /// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    /// $$ AÑADIR LLAMADA A MÉTODO AÑADIR NUEVO          $$
+    /// $$ SI SE PINCHA EN LA ÚLTIMA ENTRADA DE LA LISTA $$
+    /// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 }
 
 
@@ -231,9 +235,10 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
--(void)guardarfactura:(Factura *)Factura
+-(void)guardarfactura:(Factura *)factura
 {
-    [self.bbdd.facturas addObject:self.factura];
+    self.factura = factura;
+    [self.bbdd.facturas addObject:factura];
     [self dismissViewControllerAnimated:true completion:nil];
 }
 

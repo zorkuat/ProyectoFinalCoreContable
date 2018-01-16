@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *tipoIvaTextView;
 @property (weak, nonatomic) IBOutlet UITextField *totalTextView;
 @property (weak, nonatomic) IBOutlet UITextField *rectificacionTextView;
+@property (weak, nonatomic) IBOutlet UITextField *ficheroTextView;
 
 @property (strong, nonatomic) IBOutlet UIDatePicker *pickerFecha;
 @property (strong, nonatomic) IBOutlet UIToolbar *barraEditor;
@@ -35,15 +36,9 @@
 
 @implementation EditarFacturaController
 
-// Implementación del método de cancelar botón de la vista EDITAR
-- (IBAction)cancelButtonPressed:(id)sender {
-    //[self dismissViewControllerAnimated:true completion:nil];
-    
-    [self.delegado cancelar];
-}
-
-
-// MÉTODO DE CARGA DE LAS VISTAS.
+////////////////////////////////////
+// MÉTODO DE CARGA DE LAS VISTAS. //
+////////////////////////////////////
 // Creamos la variable de trabajo local y actualizamos los campos si no son vacíos.
 // Asociamos las referencias a vista con los campos de la variable de trabajo local.
 - (void)viewDidLoad {
@@ -74,8 +69,8 @@
     self.fechaOperacionTextView.inputAccessoryView = self.barraEditor;
      
     // Añadida la barra de botón DONE al teclado.
-    //self.campoTextoTelefono.inputAccessoryView = self.barraEditor;
-     
+    
+    self.facturaNumeroTextView.text = self.factura.numero;
     self.cIFTextView.text = self.factura.CIF;
     self.razonSocialTextView.text = self.factura.razonSocial;
     self.conceptoTextView.text = self.factura.concepto;
@@ -101,6 +96,22 @@
         formatoFecha.dateFormat = @"dd / MM / YYYY";
         self.fechaOperacionTextView.text = [formatoFecha stringFromDate:self.factura.fechaDeOperacion];
     }
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+////////////////////////////
+// MÉTODOS DE LOS BOTONES //
+////////////////////////////
+// Implementación del método de cancelar botón de la vista EDITAR
+- (IBAction)cancelButtonPressed:(id)sender {
+    //[self dismissViewControllerAnimated:true completion:nil];
+    
+    [self.delegado cancelar];
 }
 
 // Implementación del método para guardar los datos de usuario
@@ -134,48 +145,88 @@
     [self presentViewController:galeria animated:true completion:nil];
 }*/
 
-/*
-- (IBAction)botonDonePulsado:(id)sender {
-    if(self.campoTextoActual == self.campoTextoTelefono)
-    {
-        [self.campoTextoEmail becomeFirstResponder];
-    }
-    else if(self.campoTextoActual == self.campoTextoFechaNacimiento)
-    {
-        [self.campoTextoFechaNacimiento resignFirstResponder];
-    }
-}*/
+/////////////////////////////////////////
+// MÉTODOS DE GESTIÓN DEL PICKER FECHA //
+/////////////////////////////////////////
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{/*
-    if(textField == self.campoTextoNombre)
+// Gestión de la cesión del foco cuando se pulsa el botón del input auxiliar del picker.
+- (IBAction)botonDonePulsado:(id)sender {
+    
+    if(self.campoTextoActual == self.fechaExpedicionTextView)
     {
-        [self.campoTextoTelefono becomeFirstResponder];
+        [self.fechaOperacionTextView becomeFirstResponder];
     }
-    else if(textField == self.campoTextoEmail)
+    else if(self.campoTextoActual == self.fechaOperacionTextView)
     {
-        [self.campoTextoFechaNacimiento becomeFirstResponder];
+        [self.cIFTextView becomeFirstResponder];
     }
-    */
-    return true;
 }
 
+// Gestión del cambio efectivo del valor mostrado (todavía no guardado. sólo se guardará cuando se le de al save) en el picker fecha
 - (IBAction)pickerFechaCambiada:(id)sender {
-    /*
+    
     NSDateFormatter *formatoFecha = [[NSDateFormatter alloc] init];
     formatoFecha.dateFormat = @"dd / MM / YYYY";
-    self.campoTextoFechaNacimiento.text = [formatoFecha stringFromDate:self.pickerFecha.date];
-     */
-}
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    if(self.campoTextoActual == self.fechaExpedicionTextView)
+    {
+        self.fechaExpedicionTextView.text = [formatoFecha stringFromDate:self.pickerFecha.date];
+    }
+    else if(self.campoTextoActual == self.fechaOperacionTextView)
+    {
+        self.fechaOperacionTextView.text = [formatoFecha stringFromDate:self.pickerFecha.date];
+    }
 }
 
 #pragma mark - TEXT FIELD DELEGATE
+
+// Gestión del 'return' en las vistas textfield. Se cede el fóco al siguiente campo excepto el último que simplemente renuncia a él.
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+  if(textField == self.facturaNumeroTextView)
+  {
+      [self.fechaExpedicionTextView becomeFirstResponder];
+  }
+  else if(textField == self.cIFTextView)
+  {
+      [self.razonSocialTextView becomeFirstResponder];
+  }
+  else if (textField == self.razonSocialTextView)
+  {
+      [self.conceptoTextView becomeFirstResponder];
+  }
+  else if (textField == self.conceptoTextView)
+  {
+      [self.baseImponibleTextView becomeFirstResponder];
+  }
+  else if (textField == self.baseImponibleTextView)
+  {
+      [self.tipoIvaTextView becomeFirstResponder];
+  }
+  else if (textField == self.tipoIvaTextView)
+  {
+      [self.rectificacionTextView becomeFirstResponder];
+  }
+  else if (textField == self.rectificacionTextView)
+  {
+      [self.ficheroTextView becomeFirstResponder];
+  }
+  else if(textField == self.ficheroTextView)
+  {
+      [self.ficheroTextView resignFirstResponder];
+  }
+  return true;
+}
+
+/////////////////////////////////////////////////////
+// MÉTODOS DE GESTIÓN DE CONTENIDO DE LOS TEXTVIEW //
+///////////////////////////////////////////////////////////////////////////
+// TODOS LOS UIVIEW TIENEN DESIGNADO COMO DELEGADO AL PROPIO CONTROLADOR //
+// ESTO SE HACE DESDE EL STORYBOARD                                      //
+// POR CADA ESPECIALIZACIÓN QUE SE QUIERA HACER SE DEBE IMPLEMENTAR      //
+// PRIMERO LA DETECCIÓN DEL CAMPO EN EL QUE ESTAMOS Y LUEGO EL MËTODO    //
+///////////////////////////////////////////////////////////////////////////
+
+// MÉTODO PARA GESTIÓN DE CARACTERES DURANTE LA EDICIÓN.
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     /*
@@ -195,13 +246,11 @@
      
 }
 
-/*
+// MÉTODO DE SELECCIÓN DE TEXT FIELD
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    
     self.campoTextoActual = textField;
-    /
-}*/
+}
 
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
@@ -240,18 +289,17 @@
     return true /*BLOOD*/;
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 #pragma mark - Image picker delegate
 
+// NO HAY IMAGE PICKER.
+
+/// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+/// $$ IMPLEMENTAR MÉTODOS DELEGADOS PARA BÚSQUEDA Y CARGA $$
+/// $$ DE FICHERO COMPLEMENTARIO                           $$
+/// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+/*
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissViewControllerAnimated:true completion:nil];
@@ -259,7 +307,7 @@
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    /*
+    
     NSURL *imageURL = info[UIImagePickerControllerImageURL];
     
     UIImage *foto = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL] scale: 1];
@@ -269,7 +317,6 @@
     self.fotoSeleccionada = foto;
     
     [self dismissViewControllerAnimated:true completion:nil];
-     */
-}
+}*/
 
 @end

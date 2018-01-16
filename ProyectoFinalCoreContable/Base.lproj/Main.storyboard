@@ -552,15 +552,16 @@
                         <outlet property="facturaNumeroTextView" destination="KNP-kF-tQQ" id="vgh-2g-Tv8"/>
                         <outlet property="fechaExpedicionTextView" destination="0WU-H9-Wih" id="GRr-9f-gCx"/>
                         <outlet property="fechaOperacionTextView" destination="Rot-cR-YqY" id="cB0-lj-fC7"/>
+                        <outlet property="ficheroTextView" destination="Kqk-Xo-lza" id="ddh-jU-Hm7"/>
                         <outlet property="pickerFecha" destination="68u-z3-E3c" id="7Kc-3f-Et2"/>
                         <outlet property="razonSocialTextView" destination="QpR-26-pzf" id="XlZ-pL-cqA"/>
-                        <outlet property="rectificacionTextView" destination="Kqk-Xo-lza" id="pxM-gU-dBV"/>
+                        <outlet property="rectificacionTextView" destination="adX-fd-kzv" id="7uq-H7-2V7"/>
                         <outlet property="tipoIvaTextView" destination="bvK-0o-PQ6" id="s3o-ha-3ZU"/>
                         <outlet property="totalTextView" destination="8bB-xa-4a1" id="gBq-R5-A7T"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jA7-0r-nX8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="68u-z3-E3c">
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" id="68u-z3-E3c">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="162"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <date key="date" timeIntervalSinceReferenceDate="537813555.35536599">
@@ -575,7 +576,11 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <items>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="bib-zL-cS1"/>
-                        <barButtonItem systemItem="done" id="5WN-63-UUc"/>
+                        <barButtonItem systemItem="done" id="5WN-63-UUc">
+                            <connections>
+                                <action selector="botonDonePulsado:" destination="WJP-IP-Gyn" id="FQf-6z-6jN"/>
+                            </connections>
+                        </barButtonItem>
                     </items>
                 </toolbar>
             </objects>
