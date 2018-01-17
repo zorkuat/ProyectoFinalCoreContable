@@ -7,6 +7,7 @@
 //
 
 #import "EditarFacturaController.h"
+#import "ConceptoCell.h"
 #import "Factura.h"
 
 @interface EditarFacturaController ()
@@ -20,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *fechaOperacionTextView;
 @property (weak, nonatomic) IBOutlet UITextField *cIFTextView;
 @property (weak, nonatomic) IBOutlet UITextField *razonSocialTextView;
-@property (weak, nonatomic) IBOutlet UITextField *conceptoTextView;
+//@property (weak, nonatomic) IBOutlet UITextField *conceptoTextView;
 @property (weak, nonatomic) IBOutlet UITextField *baseImponibleTextView;
 @property (weak, nonatomic) IBOutlet UITextField *tipoIvaTextView;
 @property (weak, nonatomic) IBOutlet UITextField *totalTextView;
@@ -73,7 +74,7 @@
     self.facturaNumeroTextView.text = self.factura.numero;
     self.cIFTextView.text = self.factura.CIF;
     self.razonSocialTextView.text = self.factura.razonSocial;
-    self.conceptoTextView.text = self.factura.concepto;
+    //self.conceptoTextView.text = self.factura.concepto;
     self.baseImponibleTextView.text = [NSString stringWithFormat:@"%f", self.factura.baseImponible];
     self.tipoIvaTextView.text = [NSString stringWithFormat:@"%ld", self.factura.tipoIVA];
     self.rectificacionTextView.text = [NSString stringWithFormat:@"%f", self.factura.rectificacion];
@@ -121,7 +122,7 @@
     self.factura.numero = self.facturaNumeroTextView.text;
     self.factura.CIF = self.cIFTextView.text;
     self.factura.razonSocial = self.razonSocialTextView.text;
-    self.factura.concepto = self.conceptoTextView.text;
+    //self.factura.concepto = self.conceptoTextView.text;
     self.factura.baseImponible = [self.baseImponibleTextView.text floatValue];
     self.factura.tipoIVA = [self.tipoIvaTextView.text integerValue];
     self.factura.rectificacion = [self.rectificacionTextView.text floatValue];
@@ -192,10 +193,10 @@
   }
   else if (textField == self.razonSocialTextView)
   {
-      [self.conceptoTextView becomeFirstResponder];
+      /*[self.conceptoTextView becomeFirstResponder];
   }
   else if (textField == self.conceptoTextView)
-  {
+  {*/
       [self.baseImponibleTextView becomeFirstResponder];
   }
   else if (textField == self.baseImponibleTextView)
@@ -290,6 +291,7 @@
 }
 
 
+
 #pragma mark - Image picker delegate
 
 // NO HAY IMAGE PICKER.
@@ -318,5 +320,50 @@
     
     [self dismissViewControllerAnimated:true completion:nil];
 }*/
+
+//////////////////////////////
+/// MÉTODOS DEL TABLE VIEW ///
+//////////////////////////////
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    if (section == 1)
+    {
+        return self.factura.conceptos.count;
+    }
+    return [super tableView:tableView numberOfRowsInSection:section];
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 43.0;
+}
+
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1)
+    {
+        ConceptoCell *cell = [[ConceptoCell alloc] init];
+        cell.conceptoTextView.text = self.factura.conceptos[indexPath.row];
+        return cell;
+    }
+    
+    return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+};
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1) {
+        return YES;
+    }
+    return NO;
+}
 
 @end

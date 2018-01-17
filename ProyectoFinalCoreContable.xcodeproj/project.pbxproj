@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		090B5694200D0C6600A42836 /* DetalleFacturaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090B5693200D0C6600A42836 /* DetalleFacturaController.m */; };
 		0959396A200E5162005856F0 /* file-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 09593969200E5162005856F0 /* file-512.png */; };
+		0993F471200FCDEE009EF9A7 /* ConceptoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0993F470200FCDEE009EF9A7 /* ConceptoCell.m */; };
 		09E57C4320090A01001F9497 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C4220090A01001F9497 /* AppDelegate.m */; };
 		09E57C4620090A01001F9497 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C4520090A01001F9497 /* ViewController.m */; };
 		09E57C4920090A01001F9497 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E57C4720090A01001F9497 /* Main.storyboard */; };
@@ -26,6 +27,8 @@
 		090B5695200D0C8400A42836 /* DetalleFacturaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetalleFacturaController.h; sourceTree = "<group>"; };
 		090B5696200D28D800A42836 /* EditarFacturaDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditarFacturaDelegate.h; sourceTree = "<group>"; };
 		09593969200E5162005856F0 /* file-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "file-512.png"; path = "Assets.xcassets/file-512.png"; sourceTree = "<group>"; };
+		0993F46F200FCDEE009EF9A7 /* ConceptoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConceptoCell.h; sourceTree = "<group>"; };
+		0993F470200FCDEE009EF9A7 /* ConceptoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConceptoCell.m; sourceTree = "<group>"; };
 		09E57C3E20090A01001F9497 /* ProyectoFinalCoreContable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProyectoFinalCoreContable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E57C4120090A01001F9497 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		09E57C4220090A01001F9497 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -102,6 +105,8 @@
 				09E57C6820093571001F9497 /* ListadoFacturasController.h */,
 				09E57C6920093571001F9497 /* ListadoFacturasController.m */,
 				090B5696200D28D800A42836 /* EditarFacturaDelegate.h */,
+				0993F46F200FCDEE009EF9A7 /* ConceptoCell.h */,
+				0993F470200FCDEE009EF9A7 /* ConceptoCell.m */,
 			);
 			path = CONTROLADOR;
 			sourceTree = "<group>";
@@ -193,6 +198,7 @@
 				09E57C4620090A01001F9497 /* ViewController.m in Sources */,
 				090B5694200D0C6600A42836 /* DetalleFacturaController.m in Sources */,
 				09E57C5120090A01001F9497 /* main.m in Sources */,
+				0993F471200FCDEE009EF9A7 /* ConceptoCell.m in Sources */,
 				09E57C6A20093571001F9497 /* ListadoFacturasController.m in Sources */,
 				09E57C6120091015001F9497 /* bbdd.m in Sources */,
 				09E57C4320090A01001F9497 /* AppDelegate.m in Sources */,

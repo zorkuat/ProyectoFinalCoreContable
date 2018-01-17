@@ -34,14 +34,21 @@
     
     self.facturaNumeroView.text = self.factura.numero;
     
-    NSDateFormatter *formatoFecha = [[NSDateFormatter alloc] init];
+    /*NSDateFormatter *formatoFecha = [[NSDateFormatter alloc] init];
     formatoFecha.dateFormat = @"dd / MM / yyyy";
     self.fechaExpedicionView.text = [formatoFecha stringFromDate:self.factura.fechaDeExpedicion];
     self.fechaOperacionLabel.text = [formatoFecha stringFromDate:self.factura.fechaDeOperacion];
     
     self.cIFView.text = self.factura.CIF;
     self.razonSocialView.text = self.factura.razonSocial;
-    self.conceptoView.text = self.factura.concepto;
+    self.conceptoView.text = @"";
+    //// BUCLE DE CONCEPTO
+    for (int i=0; i< self.factura.conceptos.count; i++)
+    {
+        self.conceptoView.text = [self.conceptoView.text stringByAppendingString:self.factura.conceptos[i]];
+        self.conceptoView.text = [self.conceptoView.text stringByAppendingString:@"\n"];
+    }
+    
     self.baseView.text = [NSString stringWithFormat:@"%ld", (long)self.factura.baseImponible];
     self.IVAView.text = [NSString stringWithFormat:@"%ld%%", self.factura.tipoIVA];
     NSInteger total = (self.factura.baseImponible + self.factura.baseImponible*self.factura.tipoIVA/100) - self.factura.rectificacion;
@@ -49,10 +56,11 @@
     self.rectificacionView.text = [NSString stringWithFormat:@"%ld", (long)self.factura.rectificacion];
     if (self.factura.imagenFactura != nil){
         self.imageView.image = self.factura.imagenFactura;
-    }
+    }*/
 }
 
 // Método de recarga si hemos cancelado la edición de una factura. Muestra los datos anteriores.
+// Método de carga. Se carga este después del didload.
 -(void)viewWillAppear:(BOOL)animated
 {
     self.facturaNumeroView.text = self.factura.numero;
@@ -64,7 +72,15 @@
     
     self.cIFView.text = self.factura.CIF;
     self.razonSocialView.text = self.factura.razonSocial;
-    self.conceptoView.text = self.factura.concepto;
+    self.conceptoView.text = @"";
+    //// BUCLE DE CONCEPTO
+    for (int i=0; i< self.factura.conceptos.count; i++)
+    {
+        self.conceptoView.text = [self.conceptoView.text stringByAppendingString:self.factura.conceptos[i]];
+        if (i != self.factura.conceptos.count-1){
+            self.conceptoView.text = [self.conceptoView.text stringByAppendingString:@"\n"];
+        }
+    }
     self.baseView.text = [NSString stringWithFormat:@"%f", self.factura.baseImponible];
     self.IVAView.text = [NSString stringWithFormat:@"%ld%%", self.factura.tipoIVA];
     float total = (self.factura.baseImponible + self.factura.baseImponible*self.factura.tipoIVA/100) - self.factura.rectificacion;

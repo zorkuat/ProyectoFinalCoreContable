@@ -66,7 +66,7 @@
         
         // Concepto
         nuevaFactura.conceptos = [NSMutableArray array];
-        for (int i=0; i<3; i++)
+        for (int i=0; i<5; i++)
         {
             NSString *concepto = [NSString stringWithFormat:@"Concepto %d", i+1];
             [nuevaFactura.conceptos addObject:concepto];
