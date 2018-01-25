@@ -8,12 +8,27 @@
 
 #import "ConceptoCell.h"
 
+
+@interface ConceptoCell()
+
+@end
+
 @implementation ConceptoCell
 
+
+- (UITableViewCell*)init
+{
+    self=[super init];
+    if(self)
+    {
+        self.conceptoTextView = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
+        [self addSubview:self.conceptoTextView];
+    }
+    return self;
+    
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
-    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -31,7 +31,12 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker *pickerFecha;
 @property (strong, nonatomic) IBOutlet UIToolbar *barraEditor;
 
+@property (strong, nonatomic) NSMutableArray<UITextField*> *listaConceptos;
+
 @property (weak, nonatomic) UITextField *campoTextoActual;
+
+// Objeto de trabajo conceptos
+@property (nonatomic) NSMutableArray *conceptos;
 
 @end
 
@@ -48,6 +53,8 @@
     
     // Para quitar el espacio que se queda entre el picker y la barra de accesory view.
     // En realidad son movidas de constraints y su puta madre.
+    
+    // Inicialización del objeto de trabajo conceptos.
     
     if(self.factura == nil)
     {
@@ -74,7 +81,10 @@
     self.facturaNumeroTextView.text = self.factura.numero;
     self.cIFTextView.text = self.factura.CIF;
     self.razonSocialTextView.text = self.factura.razonSocial;
-    //self.conceptoTextView.text = self.factura.concepto;
+    
+    /// COPIA DEL ARRAY DE CONCEPTOS
+    self.conceptos = [NSMutableArray arrayWithArray:self.factura.conceptos];
+    
     self.baseImponibleTextView.text = [NSString stringWithFormat:@"%f", self.factura.baseImponible];
     self.tipoIvaTextView.text = [NSString stringWithFormat:@"%ld", self.factura.tipoIVA];
     self.rectificacionTextView.text = [NSString stringWithFormat:@"%f", self.factura.rectificacion];
@@ -86,7 +96,7 @@
     {
         self.pickerFecha.date = self.factura.fechaDeExpedicion;
         NSDateFormatter *formatoFecha = [[NSDateFormatter alloc] init];
-        formatoFecha.dateFormat = @"dd / MM / YYYY";
+        formatoFecha.dateFormat = @"dd / MM / yyyy";
         self.fechaExpedicionTextView.text = [formatoFecha stringFromDate:self.factura.fechaDeExpedicion];
     }
     
@@ -94,7 +104,7 @@
     {
         self.pickerFecha.date = self.factura.fechaDeOperacion;
         NSDateFormatter *formatoFecha = [[NSDateFormatter alloc] init];
-        formatoFecha.dateFormat = @"dd / MM / YYYY";
+        formatoFecha.dateFormat = @"dd / MM / yyyy";
         self.fechaOperacionTextView.text = [formatoFecha stringFromDate:self.factura.fechaDeOperacion];
     }
 }
@@ -122,13 +132,19 @@
     self.factura.numero = self.facturaNumeroTextView.text;
     self.factura.CIF = self.cIFTextView.text;
     self.factura.razonSocial = self.razonSocialTextView.text;
-    //self.factura.concepto = self.conceptoTextView.text;
+    
+    for(int i=0; i<self.listaConceptos.count; i++)
+    {
+        self.factura.conceptos[i] = [NSString stringWithFormat:@"%@",self.listaConceptos[i].text];
+    }
+    
+    //self.factura.conceptos = self.conceptos;
     self.factura.baseImponible = [self.baseImponibleTextView.text floatValue];
     self.factura.tipoIVA = [self.tipoIvaTextView.text integerValue];
     self.factura.rectificacion = [self.rectificacionTextView.text floatValue];
   
     NSDateFormatter *formatoFecha = [[NSDateFormatter alloc] init];
-    formatoFecha.dateFormat = @"dd / MM / YYYY";
+    formatoFecha.dateFormat = @"dd / MM / yyyy";
     self.factura.fechaDeExpedicion = [formatoFecha dateFromString:self.fechaExpedicionTextView.text];
     self.factura.fechaDeOperacion = [formatoFecha dateFromString:self.fechaOperacionTextView.text];
    
@@ -167,7 +183,7 @@
 - (IBAction)pickerFechaCambiada:(id)sender {
     
     NSDateFormatter *formatoFecha = [[NSDateFormatter alloc] init];
-    formatoFecha.dateFormat = @"dd / MM / YYYY";
+    formatoFecha.dateFormat = @"dd / MM / yyyy";
     if(self.campoTextoActual == self.fechaExpedicionTextView)
     {
         self.fechaExpedicionTextView.text = [formatoFecha stringFromDate:self.pickerFecha.date];
@@ -193,11 +209,23 @@
   }
   else if (textField == self.razonSocialTextView)
   {
-      /*[self.conceptoTextView becomeFirstResponder];
+      /// SI LISTA DE CONCEPTOS NO ESTÁ VACÍA LE DAMOS EL FOCO AL PRIMERO
+      if (self.listaConceptos != nil)
+          [self.listaConceptos[0] becomeFirstResponder];
+      /// SI ESTÁ VACÍA PASAMOS AL SIGUIENTE
+      else
+          [self.baseImponibleTextView becomeFirstResponder];
   }
-  else if (textField == self.conceptoTextView)
-  {*/
+    /// SI ESTAMOS EN EL ÚLTIMO OBJETO DE LA LISTA PASAMOS AL SIGUIENTE
+  else if (textField == self.listaConceptos.lastObject)
+  {
       [self.baseImponibleTextView becomeFirstResponder];
+  }
+    /// SI ESTAMOS EN CUALQUIER OBJETO DE LA LISTA (EL ÚLTIMO, EN TEORÍA, SE HA PROCESADO YA)
+    /// LE DAMOS FOCO AL SIGUIENTE
+  else if ([self.listaConceptos containsObject:textField])
+  {
+      [self.listaConceptos[[self.listaConceptos indexOfObject:textField] + 1] becomeFirstResponder];
   }
   else if (textField == self.baseImponibleTextView)
   {
@@ -255,6 +283,7 @@
 
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
+    
     /*
     if(textField == self.campoTextoEmail)
     {
@@ -334,7 +363,6 @@
     return [super tableView:tableView numberOfRowsInSection:section];
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 1;
@@ -345,16 +373,25 @@
     return 43.0;
 }
 
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1)
     {
         ConceptoCell *cell = [[ConceptoCell alloc] init];
         cell.conceptoTextView.text = self.factura.conceptos[indexPath.row];
+        cell.conceptoTextView.delegate = self;
+        
+        if (self.listaConceptos)
+        {
+            [self.listaConceptos addObject:cell.conceptoTextView];
+        }
+        else
+        {
+            self.listaConceptos = [NSMutableArray arrayWithObject:cell.conceptoTextView];
+        }
+        
         return cell;
     }
-    
     return [super tableView:tableView cellForRowAtIndexPath:indexPath];
 };
 

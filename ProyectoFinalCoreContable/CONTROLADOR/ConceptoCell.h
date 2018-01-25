@@ -10,6 +10,6 @@
 
 @interface ConceptoCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UITextField *conceptoTextView;
+@property (strong, nonatomic) IBOutlet UITextField *conceptoTextView;
 
 @end

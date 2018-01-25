@@ -20,6 +20,7 @@
 		09E57C5D20090B89001F9497 /* Factura.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C5C20090B89001F9497 /* Factura.m */; };
 		09E57C6120091015001F9497 /* bbdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C6020091015001F9497 /* bbdd.m */; };
 		09E57C6A20093571001F9497 /* ListadoFacturasController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C6920093571001F9497 /* ListadoFacturasController.m */; };
+		09FC1268201A57E60086E4D5 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FC1267201A57E60086E4D5 /* View.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		09E57C6020091015001F9497 /* bbdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bbdd.m; sourceTree = "<group>"; };
 		09E57C6820093571001F9497 /* ListadoFacturasController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListadoFacturasController.h; sourceTree = "<group>"; };
 		09E57C6920093571001F9497 /* ListadoFacturasController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListadoFacturasController.m; sourceTree = "<group>"; };
+		09FC1267201A57E60086E4D5 /* View.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				090B5696200D28D800A42836 /* EditarFacturaDelegate.h */,
 				0993F46F200FCDEE009EF9A7 /* ConceptoCell.h */,
 				0993F470200FCDEE009EF9A7 /* ConceptoCell.m */,
+				09FC1267201A57E60086E4D5 /* View.xib */,
 			);
 			path = CONTROLADOR;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0959396A200E5162005856F0 /* file-512.png in Resources */,
+				09FC1268201A57E60086E4D5 /* View.xib in Resources */,
 				09E57C4E20090A01001F9497 /* LaunchScreen.storyboard in Resources */,
 				09E57C4B20090A01001F9497 /* Assets.xcassets in Resources */,
 				09E57C4920090A01001F9497 /* Main.storyboard in Resources */,
