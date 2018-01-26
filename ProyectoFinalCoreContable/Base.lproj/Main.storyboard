@@ -600,7 +600,6 @@
         <!--Detalle de Factura Emitida-->
         <scene sceneID="WKZ-G4-YcC">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mYW-C4-1DS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Tfc-iU-x7I" customClass="DetalleFacturaController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GrR-Wj-gbU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -930,6 +929,7 @@
                         <outlet property="totalView" destination="BdB-jA-JnN" id="epd-va-xX8"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mYW-C4-1DS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="241" y="567"/>
         </scene>

@@ -21,7 +21,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *fechaOperacionTextView;
 @property (weak, nonatomic) IBOutlet UITextField *cIFTextView;
 @property (weak, nonatomic) IBOutlet UITextField *razonSocialTextView;
-//@property (weak, nonatomic) IBOutlet UITextField *conceptoTextView;
 @property (weak, nonatomic) IBOutlet UITextField *baseImponibleTextView;
 @property (weak, nonatomic) IBOutlet UITextField *tipoIvaTextView;
 @property (weak, nonatomic) IBOutlet UITextField *totalTextView;
@@ -32,6 +31,7 @@
 @property (strong, nonatomic) IBOutlet UIToolbar *barraEditor;
 
 @property (strong, nonatomic) NSMutableArray<UITextField*> *listaConceptos;
+
 
 @property (weak, nonatomic) UITextField *campoTextoActual;
 
@@ -107,6 +107,7 @@
         formatoFecha.dateFormat = @"dd / MM / yyyy";
         self.fechaOperacionTextView.text = [formatoFecha stringFromDate:self.factura.fechaDeOperacion];
     }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -368,6 +369,7 @@
     return 1;
 }
 
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 43.0;
@@ -383,10 +385,13 @@
         
         if (self.listaConceptos)
         {
+            cell.conceptoTextView.enabled = NO;
             [self.listaConceptos addObject:cell.conceptoTextView];
+            //cell.conceptoTextView.leadingAnchor = 10,0;
         }
         else
         {
+            cell.conceptoTextView.enabled = NO;
             self.listaConceptos = [NSMutableArray arrayWithObject:cell.conceptoTextView];
         }
         
@@ -395,12 +400,45 @@
     return [super tableView:tableView cellForRowAtIndexPath:indexPath];
 };
 
+/*
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1)
+    {
+        UILayoutGuide *margin = self.view.layoutMarginsGuide;
+        
+        [cell.contentView.leadingAnchor constraintEqualToAnchor:margin.leadingAnchor constant:-10.0].active = YES;
+    }
+}*/
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1)
+    {
+        [tableView setEditing:YES animated:YES];
+    }
+}
+
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1)
+    {
+        UITableViewCellEditingStyle estilo = UITableViewCellEditingStyleDelete;
+        return estilo;
+    }
+    else
+        return UITableViewCellEditingStyleNone;
+}
+
+/*
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
-        return YES;
+        return NO;
     }
     return NO;
-}
+}*/
+
 
 @end

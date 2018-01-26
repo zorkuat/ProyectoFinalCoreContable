@@ -21,7 +21,21 @@
     self=[super init];
     if(self)
     {
-        self.conceptoTextView = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
+        self.conceptoTextView = [[UITextField alloc] initWithFrame:CGRectMake(20, 0, 200, 43)];
+        CGFloat tamFont = 14.0 ;
+        UIFont *fontStyle = [self.conceptoTextView.font fontWithSize:tamFont];
+        self.conceptoTextView.font = fontStyle;
+        
+        /*UIButton* overlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [overlayButton setImage:[UIImage imageNamed:@"bookmark"] forState:UIControlStateNormal];
+        [overlayButton addTarget:self action:@selector(displayBookmarks:)
+                forControlEvents:UIControlEventTouchUpInside];
+        overlayButton = CGRectMake(0, 0, 28, 28);
+        
+        // Assign the overlay button to a stored text field
+        self.textField.leftView = overlayButton;
+        self.textField.leftViewMode = UITextFieldViewModeAlways;*/
+        
         [self addSubview:self.conceptoTextView];
     }
     return self;
