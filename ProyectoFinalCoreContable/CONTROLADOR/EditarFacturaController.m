@@ -115,6 +115,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.tableView setEditing:true animated:false];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+  
+}
+
 
 ////////////////////////////
 // MÉTODOS DE LOS BOTONES //
@@ -385,13 +395,13 @@
         
         if (self.listaConceptos)
         {
-            cell.conceptoTextView.enabled = NO;
+            //cell.conceptoTextView.enabled = NO;
             [self.listaConceptos addObject:cell.conceptoTextView];
             //cell.conceptoTextView.leadingAnchor = 10,0;
         }
         else
         {
-            cell.conceptoTextView.enabled = NO;
+            //cell.conceptoTextView.enabled = NO;
             self.listaConceptos = [NSMutableArray arrayWithObject:cell.conceptoTextView];
         }
         
@@ -411,14 +421,14 @@
     }
 }*/
 
-
+/*
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1)
-    {
+    //if (indexPath.section == 1)
+    //{
         [tableView setEditing:YES animated:YES];
-    }
-}
+    //}
+}*/
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -431,14 +441,14 @@
         return UITableViewCellEditingStyleNone;
 }
 
-/*
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
-        return NO;
+        return YES;
     }
     return NO;
-}*/
+}
 
 
 @end

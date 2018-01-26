@@ -21,7 +21,7 @@
     self=[super init];
     if(self)
     {
-        self.conceptoTextView = [[UITextField alloc] initWithFrame:CGRectMake(20, 0, 200, 43)];
+        self.conceptoTextView = [[UITextField alloc] init];
         CGFloat tamFont = 14.0 ;
         UIFont *fontStyle = [self.conceptoTextView.font fontWithSize:tamFont];
         self.conceptoTextView.font = fontStyle;
