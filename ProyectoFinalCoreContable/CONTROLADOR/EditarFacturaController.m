@@ -397,7 +397,11 @@
         {
             //cell.conceptoTextView.enabled = NO;
             [self.listaConceptos addObject:cell.conceptoTextView];
-            //cell.conceptoTextView.leadingAnchor = 10,0;
+            
+            //NSLayoutConstraint* constraint = [NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeWidth multiplier:5 constant:10.0];
+            
+            //[self.tableView addConstraint: constraint];
+            
         }
         else
         {
