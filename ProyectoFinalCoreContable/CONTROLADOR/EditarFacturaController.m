@@ -32,11 +32,9 @@
 
 @property (strong, nonatomic) NSMutableArray<UITextField*> *listaConceptos;
 
-
 @property (weak, nonatomic) UITextField *campoTextoActual;
 
-// Objeto de trabajo conceptos
-@property (nonatomic) NSMutableArray *conceptos;
+@property (nonatomic) NSMutableArray<NSString*> *copiaConceptos;
 
 @end
 
@@ -49,26 +47,15 @@
 // Asociamos las referencias a vista con los campos de la variable de trabajo local.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    // Para quitar el espacio que se queda entre el picker y la barra de accesory view.
-    // En realidad son movidas de constraints y su puta madre.
-    
+
     // Inicialización del objeto de trabajo conceptos.
+    
+    self.copiaConceptos = [NSMutableArray arrayWithArray:self.factura.conceptos];
     
     if(self.factura == nil)
     {
          self.factura = [[Factura alloc] init];
     }
-    
-    /* No hay imagen en esta vista
-    if (self.factura.imagenFactura foto != nil)
-    {
-        self.factura = self.contacto.foto;
-    }*/
-     
-    //self.vistaImagenContacto.layer.borderWidth = 1;
-    //self.vistaImagenContacto.layer.cornerRadius = 8;
      
     self.pickerFecha.translatesAutoresizingMaskIntoConstraints = false;
     self.fechaExpedicionTextView.inputView = self.pickerFecha;
@@ -81,9 +68,6 @@
     self.facturaNumeroTextView.text = self.factura.numero;
     self.cIFTextView.text = self.factura.CIF;
     self.razonSocialTextView.text = self.factura.razonSocial;
-    
-    /// COPIA DEL ARRAY DE CONCEPTOS
-    self.conceptos = [NSMutableArray arrayWithArray:self.factura.conceptos];
     
     self.baseImponibleTextView.text = [NSString stringWithFormat:@"%f", self.factura.baseImponible];
     self.tipoIvaTextView.text = [NSString stringWithFormat:@"%ld", self.factura.tipoIVA];
@@ -131,8 +115,8 @@
 ////////////////////////////
 // Implementación del método de cancelar botón de la vista EDITAR
 - (IBAction)cancelButtonPressed:(id)sender {
-    //[self dismissViewControllerAnimated:true completion:nil];
-    
+
+    self.factura.conceptos = self.copiaConceptos;
     [self.delegado cancelar];
 }
 
@@ -149,7 +133,6 @@
         self.factura.conceptos[i] = [NSString stringWithFormat:@"%@",self.listaConceptos[i].text];
     }
     
-    //self.factura.conceptos = self.conceptos;
     self.factura.baseImponible = [self.baseImponibleTextView.text floatValue];
     self.factura.tipoIVA = [self.tipoIvaTextView.text integerValue];
     self.factura.rectificacion = [self.rectificacionTextView.text floatValue];
@@ -395,35 +378,17 @@
         
         if (self.listaConceptos)
         {
-            //cell.conceptoTextView.enabled = NO;
             [self.listaConceptos addObject:cell.conceptoTextView];
-            
-            //NSLayoutConstraint* constraint = [NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:cell attribute:NSLayoutAttributeWidth multiplier:5 constant:10.0];
-            
-            //[self.tableView addConstraint: constraint];
-            
         }
         else
         {
-            //cell.conceptoTextView.enabled = NO;
             self.listaConceptos = [NSMutableArray arrayWithObject:cell.conceptoTextView];
         }
-        
         return cell;
     }
     return [super tableView:tableView cellForRowAtIndexPath:indexPath];
 };
 
-/*
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == 1)
-    {
-        UILayoutGuide *margin = self.view.layoutMarginsGuide;
-        
-        [cell.contentView.leadingAnchor constraintEqualToAnchor:margin.leadingAnchor constant:-10.0].active = YES;
-    }
-}*/
 
 /*
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -434,6 +399,8 @@
     //}
 }*/
 
+/// DEFINICIÓN DE LOS ESTILOS DE LA TABLA SEGÚN EL INDEX PATH.
+/// $$$$ FALTA POR DEFINIR LA ÚLTIMA CELDA DE AÑADIR QUE TENDRÁ UN BOTÓN DE EDICIÓN $$$$
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1)
@@ -443,6 +410,25 @@
     }
     else
         return UITableViewCellEditingStyleNone;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // If row is deleted, remove it from the list.
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        /// BORRAMOS EL ELEMENTO DE LA LISTA DE CONCEPTOS
+        [self.listaConceptos removeObjectAtIndex:indexPath.row];
+        [self.factura.conceptos removeObjectAtIndex:indexPath.row];
+        
+        /// $$$$ AJUSTAR EL CANCEL!!!!
+        
+        /// REAJUSTAMOS LA VISTA DE TABLA
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+    }
+    
 }
 
 
