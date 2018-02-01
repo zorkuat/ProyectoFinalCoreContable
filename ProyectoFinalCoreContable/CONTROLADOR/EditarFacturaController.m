@@ -34,6 +34,8 @@
 
 @property (weak, nonatomic) UITextField *campoTextoActual;
 
+@property (weak,nonatomic) UITextField *campoTextoNuevo;
+
 @property (nonatomic) NSMutableArray<NSString*> *copiaConceptos;
 
 @end
@@ -42,40 +44,41 @@
 
 ////////////////////////////////////
 // MÉTODO DE CARGA DE LAS VISTAS. //
-////////////////////////////////////
-// Creamos la variable de trabajo local y actualizamos los campos si no son vacíos.
-// Asociamos las referencias a vista con los campos de la variable de trabajo local.
+///////////////////////////////////////////////////////////////////////////////////////
+// Creamos la variable de trabajo local y actualizamos los campos si no son vacíos.  //
+// Asociamos las referencias a vista con los campos de la variable de trabajo local. //
+///////////////////////////////////////////////////////////////////////////////////////
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     // Inicialización del objeto de trabajo conceptos.
-    
     self.copiaConceptos = [NSMutableArray arrayWithArray:self.factura.conceptos];
     
+    // Inicialicación (si no hay factura que cargar) de factura vacía.
     if(self.factura == nil)
     {
          self.factura = [[Factura alloc] init];
     }
-     
+    
+    // Enlace de los pickers para fecha y botón accesorio adjunto
     self.pickerFecha.translatesAutoresizingMaskIntoConstraints = false;
     self.fechaExpedicionTextView.inputView = self.pickerFecha;
     self.fechaExpedicionTextView.inputAccessoryView = self.barraEditor;
     self.fechaOperacionTextView.inputView = self.pickerFecha;
     self.fechaOperacionTextView.inputAccessoryView = self.barraEditor;
      
-    // Añadida la barra de botón DONE al teclado.
-    
+    // Enlace de las vistas simples del controlador a los tipos del modelo
     self.facturaNumeroTextView.text = self.factura.numero;
     self.cIFTextView.text = self.factura.CIF;
     self.razonSocialTextView.text = self.factura.razonSocial;
-    
     self.baseImponibleTextView.text = [NSString stringWithFormat:@"%f", self.factura.baseImponible];
     self.tipoIvaTextView.text = [NSString stringWithFormat:@"%ld", self.factura.tipoIVA];
     self.rectificacionTextView.text = [NSString stringWithFormat:@"%f", self.factura.rectificacion];
+    // Valor computado
     NSInteger total = self.factura.baseImponible + (self.factura.tipoIVA*self.factura.baseImponible/100) - self.factura.rectificacion;
     self.totalTextView.text = [NSString stringWithFormat:@"%ld", total];
     
-    
+    // Enlace de los valores de fecha
     if(self.factura.fechaDeExpedicion != nil)
     {
         self.pickerFecha.date = self.factura.fechaDeExpedicion;
@@ -83,7 +86,6 @@
         formatoFecha.dateFormat = @"dd / MM / yyyy";
         self.fechaExpedicionTextView.text = [formatoFecha stringFromDate:self.factura.fechaDeExpedicion];
     }
-    
     if(self.factura.fechaDeOperacion != nil)
     {
         self.pickerFecha.date = self.factura.fechaDeOperacion;
@@ -91,39 +93,36 @@
         formatoFecha.dateFormat = @"dd / MM / yyyy";
         self.fechaOperacionTextView.text = [formatoFecha stringFromDate:self.factura.fechaDeOperacion];
     }
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    // inicializamos la tabla, una vez creada, para que se pueda editar. Sólo serán editables los valores que se seleccionen
     [self.tableView setEditing:true animated:false];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-  
+    // Código de terminación de visualización de la tabla
 }
 
 
 ////////////////////////////
 // MÉTODOS DE LOS BOTONES //
 ////////////////////////////
-// Implementación del método de cancelar botón de la vista EDITAR
-- (IBAction)cancelButtonPressed:(id)sender {
 
+
+/// Implementación del método de cancelar botón de la vista EDITAR.
+- (IBAction)cancelButtonPressed:(id)sender {
     self.factura.conceptos = self.copiaConceptos;
     [self.delegado cancelar];
 }
 
-// Implementación del método para guardar los datos de usuario
+
+/// Implementación del método para GUARDAR los datos de usuario
 - (IBAction)saveButtonPressed:(id)sender {
     
-    // Durante el botón guardado, actualizamos los valores desde las vistas al objeto de trabajo
+    /// Durante el botón guardado, actualizamos los valores desde las vistas al objeto de trabajo
     self.factura.numero = self.facturaNumeroTextView.text;
     self.factura.CIF = self.cIFTextView.text;
     self.factura.razonSocial = self.razonSocialTextView.text;
@@ -147,18 +146,19 @@
     [self.delegado guardarfactura:self.factura];
 }
 
+/// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+/// $$ IMPLEMENTAR MÉTODOS PARA BÚSQUEDA Y CARGA $$
+/// $$ DE FICHERO COMPLEMENTARIO                 $$
+/// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 /*
 - (IBAction)imagenPulsada:(id)sender {
-    // Ya luego si eso.
-    UIImagePickerController * galeria = [[UIImagePickerController alloc] init];
-    galeria.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    galeria.delegate = self;
-    [self presentViewController:galeria animated:true completion:nil];
 }*/
 
 /////////////////////////////////////////
 // MÉTODOS DE GESTIÓN DEL PICKER FECHA //
 /////////////////////////////////////////
+
+#pragma mark - PICKER MANAGEMENT
 
 // Gestión de la cesión del foco cuando se pulsa el botón del input auxiliar del picker.
 - (IBAction)botonDonePulsado:(id)sender {
@@ -188,9 +188,20 @@
     }
 }
 
+//////////////////////////////////////
+// MÉTODOS DELEGADOS DEL TEXT FIELD //
+//////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// TODOS LOS UIVIEW TIENEN DESIGNADO COMO DELEGADO AL PROPIO CONTROLADOR //
+// ESTO SE HACE DESDE EL STORYBOARD                                      //
+// POR CADA ESPECIALIZACIÓN QUE SE QUIERA HACER SE DEBE IMPLEMENTAR      //
+// PRIMERO LA DETECCIÓN DEL CAMPO EN EL QUE ESTAMOS Y LUEGO EL MÉTODO    //
+///////////////////////////////////////////////////////////////////////////
+
 #pragma mark - TEXT FIELD DELEGATE
 
-// Gestión del 'return' en las vistas textfield. Se cede el fóco al siguiente campo excepto el último que simplemente renuncia a él.
+/// Gestión del 'return' en las vistas textfield. Se cede el fóco al siguiente campo excepto el último que simplemente renuncia a él.
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
   if(textField == self.facturaNumeroTextView)
@@ -204,6 +215,7 @@
   else if (textField == self.razonSocialTextView)
   {
       /// SI LISTA DE CONCEPTOS NO ESTÁ VACÍA LE DAMOS EL FOCO AL PRIMERO
+      /// $$$ LA LISTA NO DEBERÍA ESTAR NUNCA VACÍA PORQUE SIEMPRE DEBE TENER AL MENOS EL CAMPO "NUEVO"
       if (self.listaConceptos != nil)
           [self.listaConceptos[0] becomeFirstResponder];
       /// SI ESTÁ VACÍA PASAMOS AL SIGUIENTE
@@ -237,19 +249,10 @@
   {
       [self.ficheroTextView resignFirstResponder];
   }
-  return true;
+  return true /*BLOOD*/;
 }
 
-/////////////////////////////////////////////////////
-// MÉTODOS DE GESTIÓN DE CONTENIDO DE LOS TEXTVIEW //
-///////////////////////////////////////////////////////////////////////////
-// TODOS LOS UIVIEW TIENEN DESIGNADO COMO DELEGADO AL PROPIO CONTROLADOR //
-// ESTO SE HACE DESDE EL STORYBOARD                                      //
-// POR CADA ESPECIALIZACIÓN QUE SE QUIERA HACER SE DEBE IMPLEMENTAR      //
-// PRIMERO LA DETECCIÓN DEL CAMPO EN EL QUE ESTAMOS Y LUEGO EL MËTODO    //
-///////////////////////////////////////////////////////////////////////////
-
-// MÉTODO PARA GESTIÓN DE CARACTERES DURANTE LA EDICIÓN.
+/// MÉTODO PARA GESTIÓN DE CARACTERES DURANTE LA EDICIÓN.
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     /*
@@ -265,59 +268,16 @@
             return false;
     }
      */
-    return true;
-     
+    return true /*BLOOD*/;
 }
 
-// MÉTODO DE SELECCIÓN DE TEXT FIELD
+/// MÉTODO DE SELECCIÓN DE TEXT FIELD
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     self.campoTextoActual = textField;
 }
 
--(BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-    
-    /*
-    if(textField == self.campoTextoEmail)
-    {
-         // Método 1
-         NSRange posicionArroba = [textField.text rangeOfString:@"@"];
-         
-         NSUInteger posicionInicialPunto = posicionArroba.location == NSNotFound ? 0 : posicionArroba.location;
-         
-         NSUInteger longitudPunto = posicionArroba.location == NSNotFound ? 0 : textField.text.length - posicionArroba.location;
-         NSRange posicionPunto = [textField.text rangeOfString:@"." options:NSBackwardsSearch range:NSMakeRange(posicionInicialPunto,longitudPunto)];
-     
-        
-        NSRange posicionArroba = [textField.text rangeOfString:@"@"];
-        NSRange posicionPunto = [textField.text rangeOfString:@"."
-                                                      options:NSBackwardsSearch
-                                                        range:NSMakeRange(0, textField.text.length)];
-        if(posicionArroba.location == NSNotFound || posicionPunto.location == NSNotFound || posicionPunto.location < posicionArroba.location)
-        {
-            UIAlertController *alerta = [UIAlertController alertControllerWithTitle:@"Error" message:@"El mensaje no es valido" preferredStyle:UIAlertControllerStyleAlert];
-            
-            [alerta addAction:[UIAlertAction actionWithTitle:@"Aceptar" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
-                               {
-                                   // [self dismissViewControllerAnimated:true completion:nil];
-                               }]];
-            
-            [self presentViewController:alerta animated:true completion:nil];
-            
-            return false;
-        }
-        
-    }*/
-
-    return true /*BLOOD*/;
-}
-
-
-
 #pragma mark - Image picker delegate
-
-// NO HAY IMAGE PICKER.
 
 /// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 /// $$ IMPLEMENTAR MÉTODOS DELEGADOS PARA BÚSQUEDA Y CARGA $$
@@ -344,15 +304,17 @@
     [self dismissViewControllerAnimated:true completion:nil];
 }*/
 
-//////////////////////////////
-/// MÉTODOS DEL TABLE VIEW ///
-//////////////////////////////
+/////////////////////////////////////////////
+/// MÉTODOS DE CONSTRUCCIÓN DE TABLE VIEW ///
+/////////////////////////////////////////////
 
+#pragma mark - Navigation Controller Delegate
+
+// Número de filas por sección
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     if (section == 1)
     {
-        return self.factura.conceptos.count;
+        return self.factura.conceptos.count + 1;
     }
     return [super tableView:tableView numberOfRowsInSection:section];
 }
@@ -361,7 +323,6 @@
 {
     return 1;
 }
-
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -372,19 +333,33 @@
 {
     if (indexPath.section == 1)
     {
-        ConceptoCell *cell = [[ConceptoCell alloc] init];
-        cell.conceptoTextView.text = self.factura.conceptos[indexPath.row];
-        cell.conceptoTextView.delegate = self;
-        
-        if (self.listaConceptos)
+        if ((self.factura.conceptos != nil) && (indexPath.row < self.factura.conceptos.count))
         {
-            [self.listaConceptos addObject:cell.conceptoTextView];
+            ConceptoCell *cell = [[ConceptoCell alloc] init];
+            cell.conceptoTextView.text = self.factura.conceptos[indexPath.row];
+            cell.conceptoTextView.delegate = self;
+            
+            if (self.listaConceptos)
+            {
+                [self.listaConceptos addObject:cell.conceptoTextView];
+            }
+            else
+            {
+                self.listaConceptos = [NSMutableArray arrayWithObject:cell.conceptoTextView];
+            }
+            return cell;
         }
         else
         {
-            self.listaConceptos = [NSMutableArray arrayWithObject:cell.conceptoTextView];
+            if( self.factura.conceptos == nil)
+            {
+                self.factura.conceptos = [[NSMutableArray alloc] init];
+            }
+            ConceptoCell *cell = [[ConceptoCell alloc] init];
+            self.campoTextoNuevo = cell.conceptoTextView;
+            return cell;
         }
-        return cell;
+        
     }
     return [super tableView:tableView cellForRowAtIndexPath:indexPath];
 };
@@ -403,9 +378,14 @@
 /// $$$$ FALTA POR DEFINIR LA ÚLTIMA CELDA DE AÑADIR QUE TENDRÁ UN BOTÓN DE EDICIÓN $$$$
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1)
+    if ((indexPath.section == 1)&&(indexPath.row < self.listaConceptos.count))
     {
         UITableViewCellEditingStyle estilo = UITableViewCellEditingStyleDelete;
+        return estilo;
+    }
+    else if ((indexPath.section == 1)&&(indexPath.row == self.listaConceptos.count))
+    {
+        UITableViewCellEditingStyle estilo = UITableViewCellEditingStyleInsert;
         return estilo;
     }
     else
@@ -414,23 +394,26 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // If row is deleted, remove it from the list.
-    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         /// BORRAMOS EL ELEMENTO DE LA LISTA DE CONCEPTOS
         [self.listaConceptos removeObjectAtIndex:indexPath.row];
         [self.factura.conceptos removeObjectAtIndex:indexPath.row];
         
-        /// $$$$ AJUSTAR EL CANCEL!!!!
-        
         /// REAJUSTAMOS LA VISTA DE TABLA
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-
+    }
+    if (editingStyle == UITableViewCellEditingStyleInsert) {
+        
+        /// INSERTAMOS UNA NUEVA CELDA EN EL TABLE VIEW Y EN LA LISTA DE CONCEPTOS.
+        ConceptoCell *cell = [[ConceptoCell alloc] init];
+        cell.conceptoTextView.text = [NSString stringWithFormat:@"%@", self.campoTextoNuevo.text];
+        self.campoTextoNuevo.text = [NSString stringWithFormat:@""];
+        [self.factura.conceptos insertObject:cell.conceptoTextView.text atIndex:indexPath.row];
+        [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
     }
     
 }
-
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {

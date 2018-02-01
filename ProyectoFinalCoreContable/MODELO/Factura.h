@@ -5,16 +5,6 @@
 //  Created by cice on 12/1/18.
 //  Copyright © 2018 TATINC. All rights reserved.
 //
-/*
-
-
-
-El Departamento de Gestión Tributaria podrá exigir en determinadas circunstancias la inclusión de menciones adicionales que, en ningún caso, podrán exceder de las exigidas para la factura completa.
-
-El Departamento de Gestión Tributaria podrá autorizar, en determinadas circunstancias, la expedición de facturas simplificadas que no incluyan los requisitos de las letras a), c), f), g) o i) citados anteriormente, así como, el NIF y domicilio del destinatario y la cuota repercutida.
-
-Dichas autorizaciones deberán ser objeto de la debida publicidad.
-*/
  
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -25,6 +15,7 @@ Dichas autorizaciones deberán ser objeto de la debida publicidad.
 //// VARIABLES OBLIGADAS DE FACTURA ///
 ///////////////////////////////////////
 
+/// Número de factura
 /// a) Número y, en su caso, serie.
 @property (nonatomic) NSString *numero;
 
@@ -40,6 +31,8 @@ Dichas autorizaciones deberán ser objeto de la debida publicidad.
 // $$$$ Ya veré si lo hago con expecializaciones de clase
 //@property (nonatomic) NSString *nombre;
 //@property (nonatomic) NSString *apellidos;
+
+/// e) Nombre del contacto al que se le hace la factura. Extenderá a clase.
 @property (nonatomic) NSString *razonSocial;
 
 /// e) Identificación de los bienes entregados o servicios prestados.
