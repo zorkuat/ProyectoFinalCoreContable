@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Concepto" representedClassName="Concepto" syncable="YES" codeGenerationType="class">
+        <attribute name="descripcion" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="realizadoParaLa" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Factura" inverseName="porLosSiguientes" inverseEntity="Factura" syncable="YES"/>
+    </entity>
+    <entity name="Factura" representedClassName="Factura" parentEntity="Concepto" syncable="YES" codeGenerationType="class">
+        <attribute name="baseImponible" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="cIF" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fechaDeExpedicion" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="fechaDeOperacion" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="numero" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="razonSocial" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rectificacion" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="tipoIVA" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="porLosSiguientes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Concepto" inverseName="realizadoParaLa" inverseEntity="Concepto" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Factura" positionX="-2853" positionY="-99" width="144" height="178"/>
+        <element name="Concepto" positionX="-2466" positionY="-46" width="128" height="73"/>
+    </elements>
+</model>

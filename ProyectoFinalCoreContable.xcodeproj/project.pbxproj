@@ -20,6 +20,12 @@
 		09E57C5D20090B89001F9497 /* Factura.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C5C20090B89001F9497 /* Factura.m */; };
 		09E57C6120091015001F9497 /* bbdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C6020091015001F9497 /* bbdd.m */; };
 		09E57C6A20093571001F9497 /* ListadoFacturasController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E57C6920093571001F9497 /* ListadoFacturasController.m */; };
+		09E6EC2A2023937200B86A64 /* FacturasModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 09E6EC282023937200B86A64 /* FacturasModel.xcdatamodeld */; };
+		09E6EC44202397EE00B86A64 /* Factura+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E6EC3D202397EE00B86A64 /* Factura+CoreDataClass.m */; };
+		09E6EC45202397EE00B86A64 /* Factura+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E6EC3F202397EE00B86A64 /* Factura+CoreDataProperties.m */; };
+		09E6EC46202397EE00B86A64 /* Concepto+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E6EC41202397EE00B86A64 /* Concepto+CoreDataClass.m */; };
+		09E6EC47202397EE00B86A64 /* Concepto+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E6EC43202397EE00B86A64 /* Concepto+CoreDataProperties.m */; };
+		09E6EC4A2023985200B86A64 /* BaseDatosSQLITE.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E6EC492023985200B86A64 /* BaseDatosSQLITE.m */; };
 		09FC1268201A57E60086E4D5 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FC1267201A57E60086E4D5 /* View.xib */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +54,18 @@
 		09E57C6020091015001F9497 /* bbdd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bbdd.m; sourceTree = "<group>"; };
 		09E57C6820093571001F9497 /* ListadoFacturasController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListadoFacturasController.h; sourceTree = "<group>"; };
 		09E57C6920093571001F9497 /* ListadoFacturasController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListadoFacturasController.m; sourceTree = "<group>"; };
+		09E6EC292023937200B86A64 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		09E6EC2B2023979000B86A64 /* ProyectoFinalCoreContable-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProyectoFinalCoreContable-Bridging-Header.h"; sourceTree = "<group>"; };
+		09E6EC3C202397EE00B86A64 /* Factura+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Factura+CoreDataClass.h"; sourceTree = "<group>"; };
+		09E6EC3D202397EE00B86A64 /* Factura+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Factura+CoreDataClass.m"; sourceTree = "<group>"; };
+		09E6EC3E202397EE00B86A64 /* Factura+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Factura+CoreDataProperties.h"; sourceTree = "<group>"; };
+		09E6EC3F202397EE00B86A64 /* Factura+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Factura+CoreDataProperties.m"; sourceTree = "<group>"; };
+		09E6EC40202397EE00B86A64 /* Concepto+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Concepto+CoreDataClass.h"; sourceTree = "<group>"; };
+		09E6EC41202397EE00B86A64 /* Concepto+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Concepto+CoreDataClass.m"; sourceTree = "<group>"; };
+		09E6EC42202397EE00B86A64 /* Concepto+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Concepto+CoreDataProperties.h"; sourceTree = "<group>"; };
+		09E6EC43202397EE00B86A64 /* Concepto+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Concepto+CoreDataProperties.m"; sourceTree = "<group>"; };
+		09E6EC482023985200B86A64 /* BaseDatosSQLITE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseDatosSQLITE.h; sourceTree = "<group>"; };
+		09E6EC492023985200B86A64 /* BaseDatosSQLITE.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseDatosSQLITE.m; sourceTree = "<group>"; };
 		09FC1267201A57E60086E4D5 /* View.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +85,7 @@
 			children = (
 				09E57C4020090A01001F9497 /* ProyectoFinalCoreContable */,
 				09E57C3F20090A01001F9497 /* Products */,
+				09E6EC2B2023979000B86A64 /* ProyectoFinalCoreContable-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,6 +112,7 @@
 				09E57C5020090A01001F9497 /* main.m */,
 				09E57C5A20090B5E001F9497 /* CONTROLADOR */,
 				09E57C5E20090B8D001F9497 /* MODELO */,
+				09E6EC282023937200B86A64 /* FacturasModel.xcdatamodeld */,
 			);
 			path = ProyectoFinalCoreContable;
 			sourceTree = "<group>";
@@ -117,10 +137,20 @@
 		09E57C5E20090B8D001F9497 /* MODELO */ = {
 			isa = PBXGroup;
 			children = (
+				09E6EC3C202397EE00B86A64 /* Factura+CoreDataClass.h */,
+				09E6EC3D202397EE00B86A64 /* Factura+CoreDataClass.m */,
+				09E6EC3E202397EE00B86A64 /* Factura+CoreDataProperties.h */,
+				09E6EC3F202397EE00B86A64 /* Factura+CoreDataProperties.m */,
+				09E6EC40202397EE00B86A64 /* Concepto+CoreDataClass.h */,
+				09E6EC41202397EE00B86A64 /* Concepto+CoreDataClass.m */,
+				09E6EC42202397EE00B86A64 /* Concepto+CoreDataProperties.h */,
+				09E6EC43202397EE00B86A64 /* Concepto+CoreDataProperties.m */,
 				09E57C5B20090B89001F9497 /* Factura.h */,
 				09E57C5C20090B89001F9497 /* Factura.m */,
 				09E57C5F20091015001F9497 /* bbdd.h */,
 				09E57C6020091015001F9497 /* bbdd.m */,
+				09E6EC482023985200B86A64 /* BaseDatosSQLITE.h */,
+				09E6EC492023985200B86A64 /* BaseDatosSQLITE.m */,
 			);
 			path = MODELO;
 			sourceTree = "<group>";
@@ -156,6 +186,7 @@
 				TargetAttributes = {
 					09E57C3D20090A01001F9497 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -198,13 +229,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09E6EC44202397EE00B86A64 /* Factura+CoreDataClass.m in Sources */,
 				09E57C5D20090B89001F9497 /* Factura.m in Sources */,
+				09E6EC46202397EE00B86A64 /* Concepto+CoreDataClass.m in Sources */,
 				09E57C4620090A01001F9497 /* ViewController.m in Sources */,
 				090B5694200D0C6600A42836 /* DetalleFacturaController.m in Sources */,
 				09E57C5120090A01001F9497 /* main.m in Sources */,
 				0993F471200FCDEE009EF9A7 /* ConceptoCell.m in Sources */,
 				09E57C6A20093571001F9497 /* ListadoFacturasController.m in Sources */,
 				09E57C6120091015001F9497 /* bbdd.m in Sources */,
+				09E6EC4A2023985200B86A64 /* BaseDatosSQLITE.m in Sources */,
+				09E6EC45202397EE00B86A64 /* Factura+CoreDataProperties.m in Sources */,
+				09E6EC47202397EE00B86A64 /* Concepto+CoreDataProperties.m in Sources */,
+				09E6EC2A2023937200B86A64 /* FacturasModel.xcdatamodeld in Sources */,
 				09E57C4320090A01001F9497 /* AppDelegate.m in Sources */,
 				09E57C5920090B51001F9497 /* EditarFacturaController.m in Sources */,
 			);
@@ -340,11 +377,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ProyectoFinalCoreContable/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TATINC.ProyectoFinalCoreContable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ProyectoFinalCoreContable-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -353,11 +394,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ProyectoFinalCoreContable/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TATINC.ProyectoFinalCoreContable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ProyectoFinalCoreContable-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -384,6 +428,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		09E6EC282023937200B86A64 /* FacturasModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				09E6EC292023937200B86A64 /* Model.xcdatamodel */,
+			);
+			currentVersion = 09E6EC292023937200B86A64 /* Model.xcdatamodel */;
+			name = FacturasModel.xcdatamodeld;
+			path = MODELO/FacturasModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 09E57C3620090A01001F9497 /* Project object */;
 }
